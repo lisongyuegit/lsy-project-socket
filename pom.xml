@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>org.springframework.boot</artifactId>
+        <groupId>spring-boot-starter-parent</groupId>
+        <version>2.1.6.RELEASE</version>
+        <relativePath/>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>lsy-project-sockert</artifactId>
+    <properties>
+        <netty.all.version>4.1.17.Final</netty.all.version>
+        <protobuf.java.version>2.4.1</protobuf.java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <edenep.mongodb.version>0.0.1-SNAPSHOT</edenep.mongodb.version>
+    </properties>
+
+    <dependencies>
+        <!--
+       <dependency>
+           <groupId>io.netty</groupId>
+           <artifactId>netty-all</artifactId>
+           <version>${netty.all.version}</version>
+       </dependency>
+
+       <dependency>
+           <groupId>com.google.protobuf</groupId>
+           <artifactId>protobuf-java</artifactId>
+           <version>${protobuf.java.version}</version>
+       </dependency>
+       <dependency>
+           <groupId>net.edenep</groupId>
+           <artifactId>edenep-mq-client</artifactId>
+           <version>${edenep.mq.version}</version>
+       </dependency>
+       <dependency>
+           <groupId>javax.servlet</groupId>
+           <artifactId>javax.servlet-api</artifactId>
+           <version>4.0.0</version>
+       </dependency>
+       <dependency>
+           <groupId>com.squareup.okhttp3</groupId>
+           <artifactId>okhttp</artifactId>
+           <version>3.6.0</version>
+       </dependency>
+     <dependency>
+           <groupId>net.edenep</groupId>
+           <artifactId>edenep-mongodb</artifactId>
+           <version>${edenep.mongodb.version}</version>
+       </dependency>-->
+    </dependencies>
+    <build>
+
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                </configuration>
+            </plugin>
+
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>2.10</version>
+                <executions>
+                    <execution>
+                        <id>copy-dependencies</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <!-- 把依赖的所有maven jar包拷贝到lib目录中（这样所有的jar包都在lib目录中） -->
+                            <outputDirectory>target/${project.artifactId}-${project.version}/lib</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>3.0.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>1.7</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <configuration>
+                            <tasks>
+                                <!-- 拷贝资源文件 -->
+                                <copy todir="target/${project.artifactId}-${project.version}/conf">
+                                    <fileset dir="src/main/resources-${environment}"></fileset>
+                                </copy>
+
+                                <!-- 拷贝启动文件 -->
+                                <!-- 拷贝当前项目的jar包 -->
+                                <copy file="target/${project.artifactId}-${project.version}.jar"
+                                      tofile="target/${project.artifactId}-${project.version}/lib/${project.artifactId}-${project.version}.jar"
+                                      overwrite="true"/>
+
+                               <!-- <copy file="server.sh"
+                                      tofile="target/${project.artifactId}-${project.version}/server.sh"
+                                      overwrite="true"/>
+
+                                <copy file="start.bat"
+                                      tofile="target/${project.artifactId}-${project.version}/start.bat"
+                                      overwrite="true"/>-->
+                            </tasks>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!--<plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>Creating a Production Build with Sencha Command</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <configuration>
+                            <executable>cmd</executable>
+                            <arguments>
+                                <argument>/C</argument>
+                                <argument>start</argument>
+                                <argument>${project.build.directory}/${project.artifactId}-${project.version}/start.bat</argument>
+                            </arguments>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>-->
+        </plugins>
+    </build>
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <properties>
+                <environment>dev</environment>
+            </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+        <profile>
+            <id>test</id>
+            <properties>
+                <environment>test</environment>
+            </properties>
+        </profile>
+        <profile>
+            <id>emu</id>
+            <properties>
+                <environment>emu</environment>
+            </properties>
+        </profile>
+        <profile>
+            <id>prod</id>
+            <properties>
+                <environment>prod</environment>
+            </properties>
+        </profile>
+    </profiles>
+</project>
