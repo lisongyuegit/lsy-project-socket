@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<servers>
+    <server id="default" description="消息队列服务端配置">
+        <property name="url" value="192.168.0.210" description="主机IP"/>
+        <property name="port" value="5672" description="主机端口" />
+        <property name="username" value="admin" description="服务器用户名"/>
+        <property name="password" value="123456" description="服务器用户密码"/>
+        <property name="virtualHost" value="/" description="虚拟主机名"/>
+        <property name="minPoolSize" value="1" description="最小连接池"/>
+        <property name="maxPoolSize" value="10" description="最大连接池"/>
+        <property name="channelSize" value="100" description="通道大小"/>
+    </server>
+
+
+    <server id="test" description="消息队列服务端配置">
+    <property name="url" value="192.168.0.206" description="主机IP"/>
+    <property name="port" value="5672" description="主机端口" />
+    <property name="username" value="admin" description="服务器用户名"/>
+    <property name="password" value="123456" description="服务器用户密码"/>
+    <property name="virtualHost" value="/" description="虚拟主机名"/>
+    <property name="minPoolSize" value="1" description="最小连接池"/>
+    <property name="maxPoolSize" value="10" description="最大连接池"/>
+    <property name="channelSize" value="100" description="通道大小"/>
+</server>
+    <server id="prod" description="消息队列服务端配置">
+        <property name="url" value="192.168.1.106" description="主机IP"/>
+        <property name="port" value="5672" description="主机端口" />
+        <property name="username" value="admin" description="服务器用户名"/>
+        <property name="password" value="123456" description="服务器用户密码"/>
+        <property name="virtualHost" value="/" description="虚拟主机名"/>
+        <property name="minPoolSize" value="1" description="最小连接池"/>
+        <property name="maxPoolSize" value="10" description="最大连接池"/>
+        <property name="channelSize" value="100" description="通道大小"/>
+    </server>
+
+</servers>
