@@ -48,7 +48,7 @@
             <resource>
                 <directory>src/main/resources</directory>
                 <excludes>
-                 <exclude>*/*</exclude><exclude>*</exclude><exclude>**/*.xml</exclude>
+                    <exclude>**/*</exclude>
                 </excludes>
                 <filtering>true</filtering>
             </resource>
@@ -106,21 +106,14 @@
                             <tasks>
                                 <!-- 拷贝资源文件 -->
                                 <copy todir="target/${project.artifactId}-${project.version}/conf">
-                                    <fileset dir="src/main/resources-${environment}"></fileset>
+                                    <fileset dir="src/main/resources"></fileset>
                                 </copy>
 
                                 <!-- 拷贝启动文件 -->
                                 <!-- 拷贝当前项目的jar包 -->
                                 <copy file="target/${project.artifactId}-${project.version}.jar"
                                       tofile="target/${project.artifactId}-${project.version}/lib/${project.artifactId}-${project.version}.jar"
-                                      overwrite="true" />
-
-                                <!--<copy file="start.bat"
-                                      tofile="target/${project.artifactId}-${project.version}/start.bat"
-                                      overwrite="true" />
-                                <copy file="server.sh"
-                                      tofile="target/${project.artifactId}-${project.version}/server.sh"
-                                      overwrite="true" />-->
+                                      overwrite="true"/>
                             </tasks>
                         </configuration>
                         <goals>
@@ -129,53 +122,9 @@
                     </execution>
                 </executions>
             </plugin>
-
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>exec-maven-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>Creating a Production Build with Sencha Command</id>
-                        <phase>install</phase>
-                        <goals>
-                            <goal>exec</goal>
-                        </goals>
-                        <configuration>
-                            <executable>cmd</executable>
-                            <arguments>
-                                <argument>/C</argument>
-                                <argument>start</argument>
-                                <argument>${project.build.directory}/${project.artifactId}-${project.version}/start.bat</argument>
-                            </arguments>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
         </plugins>
     </build>
-    <!--<plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>exec-maven-plugin</artifactId>
-        <executions>
-            <execution>
-                <id>Creating a Production Build with Sencha Command</id>
-                <phase>install</phase>
-                <goals>
-                    <goal>exec</goal>
-                </goals>
-                <configuration>
-                    <executable>cmd</executable>
-                    <arguments>
-                        <argument>/C</argument>
-                        <argument>start</argument>
-                        <argument>${project.build.directory}/${project.artifactId}-${project.version}/start.bat</argument>
-                    </arguments>
-                </configuration>
-            </execution>
-        </executions>
-    </plugin>-->
-    <!-- </plugins>
- </build>-->
+
     <profiles>
         <profile>
             <id>dev</id>
@@ -206,4 +155,3 @@
         </profile>
     </profiles>
 </project>
-
