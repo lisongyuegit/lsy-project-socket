@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <import resource="classpath:spring-mybatis.xml"/>
+    <import resource="classpath:spring-mq.xml"/>
+    <bean id="protocolService" class="lsy.project.socket.service.impl.ProtocolServiceImpl"/>
+
+    <!-- bean 服务
+    <bean id="protocolTypeService" class="com.yidcloud.collect.serviceimpl.ProtocolTypeServiceImpl"/>
+    <bean id="protocolAnalysisService" class="com.yidcloud.collect.serviceimpl.ProtocolAnalysisServiceImpl"/>
+    <bean id="protocolService" class="com.yidcloud.collect.serviceimpl.ProtocolServiceImpl"/>
+    <bean id="equipmentGroupService" class="com.yidcloud.collect.serviceimpl.EquipmentGroupServiceImpl"/>
+    <bean id="equipmentModelService" class="com.yidcloud.collect.serviceimpl.EquipmentModelServiceImpl"/>
+    <bean id="equipmentMfrsService" class="com.yidcloud.collect.serviceimpl.EquipmentMfrsServiceImpl"/>
+    <bean id="equipmentModelAttdefService" class="com.yidcloud.collect.serviceimpl.EquipmentModelAttdefServiceImpl"/>
+    <bean id="vehicleModelService" class="com.yidcloud.collect.serviceimpl.VehicleModelServiceImpl"/>
+    <bean id="collectInfoService" class="com.yidcloud.collect.serviceimpl.CollectInfoServiceImpl"/>
+    <bean id="oilTypeService" class="com.yidcloud.collect.serviceimpl.OilTypeServiceImpl"/>
+    <bean id="oilTypeStandardService" class="com.yidcloud.collect.serviceimpl.OilTypeStandardServiceImpl"/>
+    -->
+    <import resource="classpath:spring-mongo.xml"/>
+</beans>

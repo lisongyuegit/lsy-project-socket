@@ -3,14 +3,14 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <groupId>lsy.project.parent</groupId>
-        <artifactId>lsy-project-parent</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
-        <relativePath>../lsy-project-parent/pom.xml</relativePath>
+        <artifactId>escloud-parent</artifactId>
+        <groupId>com.yidcloud</groupId>
+        <version>2.0.0-SNAPSHOT</version>
+        <relativePath>../escloud-parent/pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>lsy-project-socket</artifactId>
+    <artifactId>socket-service-test2</artifactId>
     <properties>
         <netty.all.version>4.1.17.Final</netty.all.version>
         <protobuf.java.version>2.4.1</protobuf.java.version>
@@ -19,14 +19,34 @@
     </properties>
     <dependencies>
         <dependency>
-            <groupId>lsy.project.base</groupId>
-            <artifactId>lsy-project-base</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <groupId>net.edenep</groupId>
+            <artifactId>edenep-db</artifactId>
+            <version>${edenep.db.version}</version>
         </dependency>
         <dependency>
             <groupId>org.mongodb</groupId>
             <artifactId>mongo-java-driver</artifactId>
             <version>3.8.0</version>
+        </dependency>
+        <dependency>
+            <groupId>net.edenep</groupId>
+            <artifactId>edenep-mongodb</artifactId>
+            <version>${edenep.mongodb.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>net.edenep</groupId>
+            <artifactId>edenep-base-web</artifactId>
+            <version>${edenep.base.web.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>net.edenep</groupId>
+            <artifactId>edenep-mq-server</artifactId>
+            <version>${edenep.mq.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>net.edenep</groupId>
+            <artifactId>edenep-mq-client</artifactId>
+            <version>${edenep.mq.version}</version>
         </dependency>
         <dependency>
             <groupId>com.squareup.okhttp3</groupId>
@@ -41,6 +61,11 @@
 
 
 
+        <dependency>
+            <groupId>net.edenep</groupId>
+            <artifactId>edenep-mq-server</artifactId>
+            <version>${edenep.mq.version}</version>
+        </dependency>
 
     </dependencies>
     <build>
@@ -48,7 +73,7 @@
             <resource>
                 <directory>src/main/resources</directory>
                 <excludes>
-               <!--  <exclude>*/*</exclude><exclude>*</exclude><exclude>**/*.xml</exclude>-->
+                 <exclude>*/*</exclude><exclude>*</exclude><exclude>**/*.xml</exclude>
                 </excludes>
                 <filtering>true</filtering>
             </resource>
@@ -106,7 +131,7 @@
                             <tasks>
                                 <!-- 拷贝资源文件 -->
                                 <copy todir="target/${project.artifactId}-${project.version}/conf">
-                                    <fileset dir="src/main/resources"></fileset>
+                                    <fileset dir="src/main/resources-${environment}"></fileset>
                                 </copy>
 
                                 <!-- 拷贝启动文件 -->
