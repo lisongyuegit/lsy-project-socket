@@ -12,7 +12,7 @@
 
     <artifactId>lsy-project-socket</artifactId>
     <properties>
-        <netty.all.version>4.1.17.Final</netty.all.version>
+        <netty.all.version>4.1.42.Final</netty.all.version>
         <protobuf.java.version>2.4.1</protobuf.java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <edenep.mongodb.version>0.0.1-SNAPSHOT</edenep.mongodb.version>
